@@ -1,0 +1,30 @@
+<div class="mx-auto max-w-2xl py-16 px-4 sm:py-8 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Products</h2>
+    <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <div class="group relative hover:cursor-pointer" *ngFor="let item of products">
+            <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-100 group-hover:opacity-75 lg:aspect-none lg:h-72"
+                [routerLink]="['product-detail/'+ item._id]">
+                <img [src]="item.image" alt=""
+                    class="h-full w-full object-cover object-center lg:h-auto lg:w-full lg:p-2 lg:object-center">
+            </div>
+            <div class="mt-4">
+                <div class="mt-2">
+                    <h3 class="text-lg font-semibold text-gray-700">
+                        <div>
+                            <!-- <span aria-hidden="true" class="absolute inset-0"></span> -->
+                            {{item.name}}
+                        </div>
+                    </h3>
+                </div>
+                <div class="mt-3 flex items-center justify-between">
+                    <p class="text-xl font-medium text-gray-900">${{item.price}}</p>
+                    <button
+                        class="py-2 px-4 font-semibold border text-[#548776] border-[#548776] rounded-full hover:bg-[#1b4739] hover:text-white"
+                        (click)="addToCart(item)">
+                        Add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -35,9 +35,8 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(item: any) {
-    console.log(item);
     const itemProduct: ItemCart = {
-      productId: "63c45776b59c5c2f11ac1518",
+      productId: item._id,
       quantity: 1
     }
     this.cartService.addToCart(itemProduct).subscribe({

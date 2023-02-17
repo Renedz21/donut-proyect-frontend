@@ -23,6 +23,11 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'cart',
+        loadChildren: () => import('./pages/cart/cart.module').then(m => m.CartModule),
+        canActivate: [AuthGuard]
       }
     ]
   },

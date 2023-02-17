@@ -11,7 +11,7 @@ import { Products } from 'src/app/models/product.interface';
 })
 export class ProductDetailComponent implements OnInit {
 
-  _id: string = '';
+  id: string = '';
 
   oneProduct: Products | undefined;
 
@@ -21,10 +21,10 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._id = this.activatedRouter.snapshot.params['id'];
+    this.id = this.activatedRouter.snapshot.params['id'];
 
-    if (this._id) {
-      this.getOneProduct(this._id);
+    if (this.id) {
+      this.getOneProduct(this.id);
     } else {
       console.log('No hay id');
     }

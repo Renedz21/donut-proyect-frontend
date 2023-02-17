@@ -1,10 +1,10 @@
 <section class="text-gray-600 body-font overflow-hidden" *ngIf="oneProduct">
-    <div class="container px-5 py-24 mx-auto">
+    <div class="container px-5 py-0 lg:py-24 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
             <!-- <img alt="ecommerce" class="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" -->
-            <img alt="ecommerce" class="h-[400px] w-[400px]" [src]="oneProduct.image">
+            <img alt="ecommerce" class="w-full h-full  lg:w-[450px] lg:h-[450px] object-cover" [src]="oneProduct.image">
             <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                <h2 class="text-sm title-font text-gray-500 tracking-widest uppercase">{{oneProduct.category.name}}</h2>
+                <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest uppercase">{{oneProduct.category.name}}</h2> -->
                 <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{oneProduct.name}}</h1>
                 <div class="flex mb-4">
                     <span class="flex items-center">

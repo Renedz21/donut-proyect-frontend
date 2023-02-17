@@ -35,16 +35,16 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(item: any) {
-    const itemProduct: ItemCart = {
-      productId: item._id,
-      quantity: 1
-    }
-    this.cartService.addToCart(itemProduct).subscribe({
-      next: (data) => {
-        console.log(data);
-        this.cart = data.message;
-      }
-    })
+    // const itemProduct: ItemCart = {
+    //   productId: item._id,
+    //   quantity: 1
+    // }
+    // this.cartService.addToCart(itemProduct).subscribe({
+    //   next: (data) => {
+    //     console.log(data);
+    //     this.cart = data.message;
+    //   }
+    // })
   }
 
 }

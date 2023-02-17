@@ -20,4 +20,15 @@ export class CartService {
     return this.http.post<any>(`${environment.apiUrl}/cart/${userId}`, item);
   }
 
+  getCart(): Observable<any> {
+    const userId = this.authService.getSession()?.user?._id;
+    return this.http.get<any>(`${environment.apiUrl}/cart/${userId}`);
+  }
+
+  removeProduct(productId: string): Observable<any> {
+    const userId = this.authService.getSession()?.user?._id;
+
+    return this.http.delete<any>(`${environment.apiUrl}/cart/${userId}/${productId}`);
+  }
+
 }

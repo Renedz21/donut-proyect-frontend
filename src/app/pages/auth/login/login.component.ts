@@ -51,7 +51,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.auth).subscribe({
       next: (response) => {
-        let session = new Session(response.token, response.others);
+        console.log(response)
+        let session = new Session(response.token, response.user);
         this.authService.saveSession(session);
         if (this.returnUrl) {
           this.router.navigateByUrl(`${this.returnUrl}`);

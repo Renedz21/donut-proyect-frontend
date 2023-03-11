@@ -8,7 +8,7 @@
             </div>
 
             <ul class=" flex items-center justify-center gap-8">
-                <li><a
+                <li><a routerLink="home"
                         class="text-gray-800 font-semibold hover:cursor-pointer hover:border-b-2 hover:border-[#548776]">Home</a>
                 </li>
                 <li><a
@@ -53,15 +53,16 @@
                 </div>
 
                 <div class="relative">
-                    <button class="bg-[#548776] text-white p-1.5 rounded-full">
+                    <button routerLink="cart" class="bg-[#548776] text-white p-1.5 rounded-full">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8"
                             stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                         </svg>
 
-                        <div *ngIf="cartItems >0"
-                            class="absolute -top-[5px] right-0 rounded-full p-1 flex items-center justify-center bg bg-indigo-700">
+                        <div *ngIf="cartItems"
+                            class="absolute -top-[10px] w-6 h-6 -right-[10px] rounded-full p-1 flex items-center justify-center bg bg-indigo-700">
+                            <span class="text-xs text-white">{{cartItems}}</span>
                         </div>
                     </button>
                 </div>

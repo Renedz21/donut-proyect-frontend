@@ -6,6 +6,9 @@ import { HomeComponent } from './home.component';
 import { ProductsComponent } from './products/products.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 
+import { NgOptimizedImage } from '@angular/common';
+import { SharedModule } from '../shared/shared.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -32,7 +35,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     ComponentsModule,
-    RouterModule.forChild(routes)
+    NgOptimizedImage,
+    RouterModule.forChild(routes),
+    SharedModule
   ]
 })
 export class HomeModule { }

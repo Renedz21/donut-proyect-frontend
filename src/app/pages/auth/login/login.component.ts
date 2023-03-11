@@ -5,6 +5,8 @@ import { Auth } from 'src/app/models/auth-request/auth.class';
 import { Session } from 'src/app/models/session.class';
 import { AuthService } from 'src/app/services/auth.service';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -22,7 +24,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private spinner: NgxSpinnerService
   ) {
     this.savedSession = this.authService.getSession();
     if (this.savedSession?.authenticated) this.redirectToHome();
@@ -46,6 +49,8 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
 
+    this.spinner.show();
+
     this.auth.email = this.formGroup.value.email;
     this.auth.password = this.formGroup.value.password;
 
@@ -58,6 +63,13 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(`${this.returnUrl}`);
         }
         this.redirectToHome();
+      },
+      error: (error) => {
+        console.log(error)
+        this.spinner.hide();
+      },
+      complete: () => {
+        this.spinner.hide();
       }
     })
   }

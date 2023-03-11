@@ -13,9 +13,11 @@ import { ItemCart } from 'src/app/models/request/transport.interface';
 })
 export class ProductsComponent implements OnInit {
 
-  products: Products[] = [];
+  // products: Products[] = [];
+  products: any[] = [];
+  isLoading: boolean = true;
 
-  cart: any;
+  quantity: number = 0;
 
   constructor(
     private productService: ProductsService,
@@ -29,22 +31,29 @@ export class ProductsComponent implements OnInit {
   getAllProducts(): void {
     this.productService.getProducts().subscribe({
       next: (data) => {
+        console.log(data);
         this.products = data;
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 1000);
+        // data.forEach((item: any) => {
+        //   this.images = item.images;
+        // })
       }
     })
   }
 
   addToCart(item: any) {
-    // const itemProduct: ItemCart = {
-    //   productId: item._id,
-    //   quantity: 1
-    // }
-    // this.cartService.addToCart(itemProduct).subscribe({
-    //   next: (data) => {
-    //     console.log(data);
-    //     this.cart = data.message;
-    //   }
-    // })
+    const itemProduct: ItemCart = {
+      quantity: 1,
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      description: item.description
+    }
+
+    this.cartService.addToCart(itemProduct);
   }
 
 }

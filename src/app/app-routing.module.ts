@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ComponentsModule } from './components/components.module';
 import { AuthGuard } from './guards/auth.guard';
+import { SharedModule } from './pages/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -36,8 +37,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    ComponentsModule
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, SharedModule, ComponentsModule]
 })
 export class AppRoutingModule { }

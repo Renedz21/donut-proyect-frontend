@@ -15,6 +15,9 @@ export class ProductsService {
     private http: HttpClient
   ) { }
 
+  // getProducts(): Observable<any> {
+  //   return this.http.get<any>(`https://api.escuelajs.co/api/v1/products`);
+  // }
   getProducts(): Observable<Products[]> {
     return this.http.get<Products[]>(`${environment.apiUrl}/products`);
   }

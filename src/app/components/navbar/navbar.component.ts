@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getSession()?.user?.isAdmin ? this.isAdmin = true : this.isAdmin = false;
-    // this.getItemsCart()
+    this.getItemsCart()
   }
 
   logout() {
@@ -49,18 +49,10 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  // getItemsCart() {
-  //   this.cartService.getCart().subscribe({
-  //     next: (res) => {
-  //       console.log(res);
-  //       if (res) {
-  //         // this.cartItems = res.products?.length;
-  //       } else {
-  //         console.log('No hay productos en el carrito');
-  //       }
-  //       // update in real time the number of items in the cart and assing it to the variable cartItems
-  //     }
-  //   });
-  // }
+  getItemsCart() {
+    this.cartService.cart$.subscribe((cart: any) => {
+      this.cartItems = cart.length;
+    })
+  }
 
 }

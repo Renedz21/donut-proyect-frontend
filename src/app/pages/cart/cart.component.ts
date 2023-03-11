@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Products } from 'src/app/models/product.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -11,51 +13,53 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CartComponent implements OnInit {
 
-  products: Products[] = [];
+  products: any;
 
-  totalAmount: number = 0;
+  totalAmount: any;
 
   result: any;
   constructor(
     private cartService: CartService,
-    private authService: AuthService,
-    private productService: ProductsService,
+    private router: Router,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
     this.getCart();
+    // this.getTotalAmount();
   }
 
   getCart() {
-    this.cartService.getCart().subscribe({
-      next: (res) => {
-        console.log(res);
-        this.products = res.products;
-        this.result = res.cart.products.forEach((product: any) => {
-          console.log(product);
-          this.productService.getOneProduct(product.productId).subscribe({
-            next: (res) => {
-              console.log(res);
-              this.totalAmount == res.price;
+    const item = localStorage.getItem('cart');
+    this.products = JSON.parse(item ? item : '[]');
+    this.products.forEach((item: any) => {
+      this.totalAmount = item.price * item.quantity;
+    })
 
-            }
-          })
-
-
-        });
-
-        console.log(this.result);
-
-      }
-    });
-
+    this.totalAmount = this.products.reduce((acc: any, item: any) => {
+      return acc + item.price * item.quantity;
+    }, 0)
 
   }
 
-  removeProduct(id: string) {
-    this.cartService.removeProduct(id).subscribe({
+  getTotalAmount() {
+    this.products.forEach((item: any) => {
+      this.totalAmount = item.price * item.quantity;
+    })
+  }
+
+  saveCart() {
+    this.spinner.show();
+    this.cartService.saveCart(this.products).subscribe({
       next: (res) => {
-        this.getCart();
+        this.cartService.clearLocalStorage();
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+      complete: () => {
+        this.spinner.hide();
       }
     });
   }
